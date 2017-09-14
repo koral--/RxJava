@@ -9,7 +9,8 @@ if [ "$buildTag" != "" ] && [ "${buildTag:0:3}" != "v2." ]; then
 fi
 
 export GRADLE_OPTS=-Xmx1024m
-
+echo 'jdk.certpath.disabledAlgorithms=MD2, MD5, RSA keySize < 1024, DSA keySize < 1024, EC keySize < 224, ECDSA' >> /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/security/java.security
+    
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo -e "Build Pull Request #$TRAVIS_PULL_REQUEST => Branch [$TRAVIS_BRANCH]"
   ./gradlew -Prelease.useLastTag=true build
